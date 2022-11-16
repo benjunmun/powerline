@@ -79,6 +79,16 @@ class Repository(object):
 				return self.repo_statuses_str[resulting_status]
 
 	def branch(self):
+		topic_file = join(self.directory, '.hg', 'topic')
+		topic = get_branch_name(
+			directory=self.directory,
+			config_file=topic_file,
+			get_func=branch_name_from_config_file,
+			create_watcher=self.create_watcher,
+		)
+		if topic != '':
+			return topic
+
 		config_file = join(self.directory, '.hg', 'branch')
 		return get_branch_name(
 			directory=self.directory,
