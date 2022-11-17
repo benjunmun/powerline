@@ -29,6 +29,12 @@ class Repository(object):
 	}
 	repo_statuses_str = (None, 'D ', ' U', 'DU')
 
+	@staticmethod
+	def ignore_event(path, name):
+		if path.endswith('/.hg') and name.startswith(b'tmp'):
+			return True
+		return False
+
 	def __init__(self, directory, create_watcher):
 		self.directory = os.path.abspath(directory)
 		self.create_watcher = create_watcher

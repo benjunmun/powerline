@@ -157,7 +157,7 @@ class INotifyTreeWatcher(INotify):
 		super(INotifyTreeWatcher, self).__init__()
 		self.basedir = realpath(basedir)
 		self.watch_tree()
-		self.modified = True
+		self.modified = False
 		self.ignore_event = (lambda path, name: False) if ignore_event is None else ignore_event
 
 	def watch_tree(self):
